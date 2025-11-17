@@ -1,4 +1,3 @@
-
 const searchInput = document.getElementById("searchInput");
 const searchBtn   = document.getElementById("searchBtn");
 const messageP    = document.getElementById("message");
@@ -19,17 +18,21 @@ function searchUniversities() {
         return;
     }
 
-    const url = `http://universities.hipolabs.com/search?name=${encodeURIComponent(query)}`;
+    // الرابط الأصلي للـ API
+    const apiUrl = `http://universities.hipolabs.com/search?name=${encodeURIComponent(query)}`;
+
+    // نمرّره عن طريق AllOrigins مع https
+    const url = `https://api.allorigins.win/raw?url=${encodeURIComponent(apiUrl)}`;
 
     fetch(url)
         .then(response => {
             if (!response.ok) {
                 throw new Error("Network response was not ok");
             }
-            return response.json(); 
+            return response.json();
         })
         .then(data => {
-            if (data.length === 0) {
+            if (!Array.isArray(data) || data.length === 0) {
                 messageP.textContent = "No universities found.";
                 return;
             }
