@@ -1,3 +1,4 @@
+
 const searchInput = document.getElementById("searchInput");
 const searchBtn   = document.getElementById("searchBtn");
 const messageP    = document.getElementById("message");
@@ -18,20 +19,23 @@ function searchUniversities() {
         return;
     }
 
-    // الرابط الأصلي للـ API
     const apiUrl = `http://universities.hipolabs.com/search?name=${encodeURIComponent(query)}`;
 
-    // نمرّره عن طريق AllOrigins مع https
     const url = `https://api.allorigins.win/raw?url=${encodeURIComponent(apiUrl)}`;
+
+    console.log("Requesting:", url);
 
     fetch(url)
         .then(response => {
+            console.log("Response status:", response.status);
             if (!response.ok) {
                 throw new Error("Network response was not ok");
             }
             return response.json();
         })
         .then(data => {
+            console.log("Data received:", data);
+
             if (!Array.isArray(data) || data.length === 0) {
                 messageP.textContent = "No universities found.";
                 return;
@@ -41,10 +45,10 @@ function searchUniversities() {
                 const tr = document.createElement("tr");
 
                 const nameTd = document.createElement("td");
-                nameTd.textContent = university.name;
+                nameTd.textContent = university.name || "N/A";
 
                 const countryTd = document.createElement("td");
-                countryTd.textContent = university.country;
+                countryTd.textContent = university.country || "N/A";
 
                 const websiteTd = document.createElement("td");
                 if (university.web_pages && university.web_pages.length > 0) {
@@ -65,15 +69,19 @@ function searchUniversities() {
             });
         })
         .catch(error => {
-            console.error("Error:", error);
+            console.error("Fetch error:", error);
             messageP.textContent = "An error occurred. Please try again.";
         });
 }
 
-searchBtn.addEventListener("click", searchUniversities);
+if (searchBtn) {
+    searchBtn.addEventListener("click", searchUniversities);
+}
 
-searchInput.addEventListener("keyup", function (event) {
-    if (event.key === "Enter") {
-        searchUniversities();
-    }
-});
+if (searchInput) {
+    searchInput.addEventListener("keyup", function (event) {
+        if (event.key === "Enter") {
+            searchUniversities();
+        }
+    });
+}
