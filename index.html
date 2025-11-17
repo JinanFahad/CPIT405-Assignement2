@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>University Search – Jinan</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+    <header>
+        <div class="nav">
+            <div class="brand">
+                <span class="brand-name">Jinan Fahad</span>
+                <small>IT Student</small>
+            </div>
+        </div>
+    </header>
+
+    <main class="page">
+
+        <aside class="aside">
+            <div class="avatar">
+    <img src="ma-logo.jpg" alt="Jinan Fahad Logo" />
+</div>
+
+
+            <div class="name">Jinan Fahad</div>
+            <p class="role">IT Student – King Abdulaziz University</p>
+
+            <div class="contact-box">
+                <div class="row">
+                    Email:
+                    <a href="mailto:jbalmidfa@stu.kau.edu.sa">
+                        jbalmidfa@stu.kau.edu.sa
+                    </a>
+                </div>
+                <div class="row">
+                    Student ID: 2108532
+                </div>
+            </div>
+        </aside>
+
+        <section class="main">
+
+            <section id="search" class="section">
+                <h1>University Search</h1>
+                <p>
+                    Type a university name and click <strong>Search</strong> to fetch data
+                    from the Hipolabs Universities API.
+                </p>
+
+                <div class="field">
+                    <label for="searchInput">University name</label>
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="e.g. harvard, king, technology"
+                    />
+                </div>
+
+                <div class="actions">
+                    <button id="searchBtn">Search</button>
+                </div>
+
+                <p id="message"></p>
+
+                <div class="table-wrapper" style="margin-top: 12px;">
+                    <table class="table striped hoverable">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Country</th>
+                                <th>Website</th>
+                            </tr>
+                        </thead>
+                        <tbody id="resultsBody">
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
